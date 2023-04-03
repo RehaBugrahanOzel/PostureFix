@@ -1,30 +1,44 @@
 <template>
-  <div class="initial">
-    <div class="title-section">
-      <img src="../assets/logo.svg" alt="logo" class="logo" />
-      <div class="title">PostureFix</div>
+  <div>
+    <div class="initial">
+      <div class="title-section">
+        <img src="../assets/logo.svg" alt="logo" class="logo" />
+        <div class="title">PostureFix</div>
+      </div>
+      <div class="first-cart">
+        <CommonButton text="Login" class="button" wrapper="dark" />
+      </div>
+      <div class="second-cart">
+        <CommonButton text="Register" class="button" wrapper="light" />
+      </div>
     </div>
-    <div class="first-cart">
-      <CommonButton text="Login" class="button" wrapper="dark" />
-    </div>
-    <div class="second-cart">
-      <CommonButton text="Register" class="button" wrapper="light" />
-    </div>
+    <LoginTab class="login-tab" />
   </div>
 </template>
 
 <script>
 import CommonButton from "../components/CommonButton.vue";
+import LoginTab from "../tabs/LoginTab.vue";
 import "../assets/css/style.css";
 export default {
   name: "InitialPage",
   components: {
     CommonButton,
+    LoginTab,
   },
 };
 </script>
 
-<style>
+<style scoped>
+.login-tab {
+  background-color: #ffffff;
+  position: absolute;
+  top: 44px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  border-radius: 32px 32px 0 0;
+}
 .initial {
   background: #cfe2fa;
   position: absolute;
