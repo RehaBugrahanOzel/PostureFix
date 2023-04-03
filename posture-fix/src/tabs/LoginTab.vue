@@ -10,8 +10,15 @@
     </div>
     <div class="text">Welcome back! Glad to see you, Again!</div>
     <div class="input-section">
-      <CommonInput class="element" text="Enter your email" />
-      <CommonInput class="element" text="Enter your password" />
+      <CommonInput class="element" text="Enter your email" inputType="text" />
+      <CommonInput
+        class="element"
+        text="Enter your password"
+        inputType="password"
+      />
+      <div class="forgot-password">
+        <div>Forgot Password?</div>
+      </div>
     </div>
   </div>
 </template>
@@ -71,5 +78,7 @@ export default {
   line-height: 100%;
   font-family: "Arial";
   margin: 35px 74px 42px 21px;
+}
+.forgot-password {
 }
 </style>
