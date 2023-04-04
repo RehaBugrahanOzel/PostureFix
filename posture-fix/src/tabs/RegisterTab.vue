@@ -1,5 +1,5 @@
 <template>
-  <div class="login">
+  <div class="register">
     <div class="header">
       <img
         src="../assets/img/back-button.svg"
@@ -8,33 +8,33 @@
         @click="goBack"
       />
       <img
-        src="../assets/img/logo-mini.svg"
+        src="../assets/img/logo-mini-light.svg"
         alt="logo-mini"
         class="logo-mini"
       />
     </div>
-    <div class="text">Welcome back! Glad to see you, Again!</div>
+    <div class="text">Welcome to PostureFix! Register to start moving!</div>
     <div class="input-section">
+      <CommonInput class="element" text="Username" inputType="text" />
       <CommonInput class="element" text="Enter your email" inputType="text" />
+      <CommonInput class="element" text="Password" inputType="password" />
       <CommonInput
         class="element"
-        text="Enter your password"
+        text="Confirm password"
         inputType="password"
       />
-      <div class="forgot-password">
-        <div>Forgot Password?</div>
-      </div>
     </div>
-    <CommonButton text="Login" class="button" wrapper="dark" @click="login" />
-    <div class="login-options-txt">Or Login with</div>
+    <CommonButton
+      text="Agree and Register"
+      class="button"
+      wrapper="grey"
+      @click="register"
+    />
+    <div class="login-options-txt">Or Register With</div>
     <div class="login-options">
       <CommonIconButton :src="facebookIconSrc" class="element" />
       <CommonIconButton :src="googleIconSrc" class="element" />
       <CommonIconButton :src="appleIconSrc" class="element" />
-    </div>
-    <div class="register-now">
-      Don’t have an account?
-      <a @click="goToRegister" style="color: #35c2c1">Register Now</a>
     </div>
   </div>
 </template>
@@ -44,13 +44,13 @@ import CommonInput from "@/components/CommonInput.vue";
 import CommonButton from "../components/CommonButton.vue";
 import CommonIconButton from "../components/CommonIconButton.vue";
 import FacebookIcon from "../assets/img/facebook-icon.svg";
-import GoogleIcon from "../assets/img/google-icon.svg";
-import AppleIcon from "../assets/img/apple-icon.svg";
+import GoogleIcon from "../assets/img/google-icon-light.svg";
+import AppleIcon from "../assets/img/apple-icon-light.svg";
 import router from "@/router/router";
 export default {
-  name: "LoginTab",
+  name: "RegisterTab",
   props: {
-    isLoginActive: String,
+    isRegisterActive: String,
   },
   components: {
     CommonInput,
@@ -59,9 +59,9 @@ export default {
   },
   methods: {
     goBack() {
-      this.$emit("loginClosed", false);
+      this.$emit("registerClosed", false);
     },
-    login() {
+    register() {
       router.push("/home");
     },
   },
@@ -76,7 +76,7 @@ export default {
 </script>
 
 <style scoped>
-.login {
+.register {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -115,17 +115,13 @@ export default {
   height: 59px;
 }
 .text {
+  color: #ffffff;
   font-weight: normal;
   font-size: 30px;
   line-height: 39px;
   line-height: 100%;
   font-family: "Arial";
   margin: 35px 74px 42px 21px;
-}
-.forgot-password {
-  margin-top: 5px;
-  font-size: 14px;
-  font-family: "Arial";
 }
 
 .button {
@@ -135,6 +131,7 @@ export default {
   margin-top: 7%;
 }
 .login-options-txt {
+  color: #ffffff;
   font-size: 14px;
   margin-top: 30px;
   position: relative;
@@ -148,7 +145,7 @@ export default {
   position: absolute;
   top: 50%;
   background: #e8ecf4;
-  right: 90px;
+  right: 110px;
 }
 .login-options-txt:after {
   content: " ";
@@ -158,7 +155,7 @@ export default {
   display: block;
   position: absolute;
   top: 50%;
-  left: 90px;
+  left: 110px;
 }
 .login-options {
   margin-top: 22px;
@@ -176,10 +173,5 @@ export default {
   height: 26px;
   border-radius: 8px;
   margin: 0 4px;
-}
-.register-now {
-  font-size: 14px;
-  margin-top: 83px;
-  bottom: 30px;
 }
 </style>

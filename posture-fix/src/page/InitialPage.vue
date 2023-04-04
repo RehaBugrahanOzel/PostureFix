@@ -14,7 +14,12 @@
         />
       </div>
       <div class="second-cart">
-        <CommonButton text="Register" class="button" wrapper="light" />
+        <CommonButton
+          text="Register"
+          class="button"
+          wrapper="light"
+          @click="register"
+        />
       </div>
     </div>
     <LoginTab
@@ -23,30 +28,45 @@
       :isLoginActive="isLoginActive"
       @loginClosed="loginClosed"
     />
+    <RegisterTab
+      class="register-tab"
+      v-if="isRegisterActive"
+      :isRegisterActive="isRegisterActive"
+      @registerClosed="registerClosed"
+    />
   </div>
 </template>
 
 <script>
 import CommonButton from "../components/CommonButton.vue";
 import LoginTab from "../tabs/LoginTab.vue";
+import RegisterTab from "../tabs/RegisterTab.vue";
 import "../assets/css/style.css";
 export default {
   name: "InitialPage",
   components: {
     CommonButton,
     LoginTab,
+    RegisterTab,
   },
   data() {
     return {
       isLoginActive: false,
+      isRegisterActive: false,
     };
   },
   methods: {
     login() {
       this.isLoginActive = true;
     },
+    register() {
+      this.isRegisterActive = true;
+    },
     loginClosed(state) {
       this.isLoginActive = state;
+    },
+    registerClosed(state) {
+      this.isRegisterActive = state;
     },
   },
 };
@@ -62,8 +82,23 @@ export default {
   left: 0px;
   border-radius: 32px 32px 0 0;
 }
+.register-tab {
+  background-color: #000000;
+  position: absolute;
+  top: 44px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  border-radius: 32px 32px 0 0;
+}
 .initial {
-  background: #cfe2fa;
+  background: linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(223, 236, 252, 1) 33%,
+    rgba(207, 226, 250, 1) 50%,
+    rgba(207, 226, 250, 1) 68%
+  );
   position: absolute;
   top: 0px;
   right: 0px;

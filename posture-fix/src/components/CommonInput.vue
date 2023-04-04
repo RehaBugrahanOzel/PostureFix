@@ -76,6 +76,7 @@ export default {
   text-shadow: 0px 0px 5px rgba(66, 66, 66, 0);
 }
 .show-password {
+  background-color: #ffffff;
   border-width: 1px 1px 1px 0;
   border-radius: 0 8px 8px 0;
   border-color: #cccccc;
