@@ -2,7 +2,7 @@
   <div>
     <div class="initial">
       <div class="title-section">
-        <img src="../assets/logo.svg" alt="logo" class="logo" />
+        <img src="../assets/img/logo.svg" alt="logo" class="logo" />
         <div class="title">PostureFix</div>
       </div>
       <div class="first-cart">

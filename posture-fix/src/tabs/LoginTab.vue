@@ -2,12 +2,16 @@
   <div class="login">
     <div class="header">
       <img
-        src="../assets/back-button.svg"
+        src="../assets/img/back-button.svg"
         alt="back-button"
         class="back-button"
         @click="goBack"
       />
-      <img src="../assets/logo-mini.svg" alt="logo-mini" class="logo-mini" />
+      <img
+        src="../assets/img/logo-mini.svg"
+        alt="logo-mini"
+        class="logo-mini"
+      />
     </div>
     <div class="text">Welcome back! Glad to see you, Again!</div>
     <div class="input-section">
@@ -21,11 +25,27 @@
         <div>Forgot Password?</div>
       </div>
     </div>
+    <CommonButton text="Login" class="button" wrapper="dark" @click="login" />
+    <div class="login-options-txt">Or Login with</div>
+    <div class="login-options">
+      <CommonIconButton :src="facebookIconSrc" class="element" />
+      <CommonIconButton :src="googleIconSrc" class="element" />
+      <CommonIconButton :src="appleIconSrc" class="element" />
+    </div>
+    <div class="register-now">
+      Don’t have an account?
+      <a @click="goToRegister" style="color: #35c2c1">Register Now</a>
+    </div>
   </div>
 </template>
 
 <script>
 import CommonInput from "@/components/CommonInput.vue";
+import CommonButton from "../components/CommonButton.vue";
+import CommonIconButton from "../components/CommonIconButton.vue";
+import FacebookIcon from "../assets/img/facebook-icon.svg";
+import GoogleIcon from "../assets/img/google-icon.svg";
+import AppleIcon from "../assets/img/apple-icon.svg";
 export default {
   name: "LoginTab",
   props: {
@@ -33,11 +53,20 @@ export default {
   },
   components: {
     CommonInput,
+    CommonButton,
+    CommonIconButton,
   },
   methods: {
     goBack() {
       this.$emit("loginClosed", false);
     },
+  },
+  data() {
+    return {
+      facebookIconSrc: FacebookIcon,
+      googleIconSrc: GoogleIcon,
+      appleIconSrc: AppleIcon,
+    };
   },
 };
 </script>
@@ -48,6 +77,7 @@ export default {
   flex-direction: column;
   align-items: center;
   padding-top: 7px;
+  font-family: "Arial";
 }
 
 .input-section {
@@ -89,5 +119,63 @@ export default {
   margin: 35px 74px 42px 21px;
 }
 .forgot-password {
+  margin-top: 5px;
+  font-size: 14px;
+  font-family: "Arial";
+}
+
+.button {
+  width: 80%;
+  max-width: 330px;
+  height: 56px;
+  margin-top: 7%;
+}
+.login-options-txt {
+  font-size: 14px;
+  margin-top: 30px;
+  position: relative;
+  max-width: 500px;
+}
+.login-options-txt:before {
+  content: " ";
+  display: block;
+  height: 1px;
+  width: 95px;
+  position: absolute;
+  top: 50%;
+  background: #e8ecf4;
+  right: 90px;
+}
+.login-options-txt:after {
+  content: " ";
+  height: 1px;
+  width: 95px;
+  background: #e8ecf4;
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 90px;
+}
+.login-options {
+  margin-top: 22px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.login-options .element {
+  padding: 15px 40px;
+  border-width: 1px;
+  border-color: #cccccc;
+  border-style: solid;
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  margin: 0 4px;
+}
+.register-now {
+  font-size: 14px;
+  margin-top: 83px;
+  bottom: 30px;
 }
 </style>

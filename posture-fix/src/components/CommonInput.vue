@@ -8,7 +8,7 @@
       "
     />
     <img
-      src="../assets/show-password.svg"
+      src="../assets/img/show-password.svg"
       alt="show-password"
       class="show-password"
       v-if="inputType === 'password'"
