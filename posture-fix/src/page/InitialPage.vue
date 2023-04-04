@@ -6,13 +6,23 @@
         <div class="title">PostureFix</div>
       </div>
       <div class="first-cart">
-        <CommonButton text="Login" class="button" wrapper="dark" />
+        <CommonButton
+          text="Login"
+          class="button"
+          wrapper="dark"
+          @click="login"
+        />
       </div>
       <div class="second-cart">
         <CommonButton text="Register" class="button" wrapper="light" />
       </div>
     </div>
-    <LoginTab class="login-tab" />
+    <LoginTab
+      class="login-tab"
+      v-if="isLoginActive"
+      :isLoginActive="isLoginActive"
+      @loginClosed="loginClosed"
+    />
   </div>
 </template>
 
@@ -25,6 +35,19 @@ export default {
   components: {
     CommonButton,
     LoginTab,
+  },
+  data() {
+    return {
+      isLoginActive: false,
+    };
+  },
+  methods: {
+    login() {
+      this.isLoginActive = true;
+    },
+    loginClosed(state) {
+      this.isLoginActive = state;
+    },
   },
 };
 </script>

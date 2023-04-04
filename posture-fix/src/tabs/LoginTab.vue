@@ -5,6 +5,7 @@
         src="../assets/back-button.svg"
         alt="back-button"
         class="back-button"
+        @click="goBack"
       />
       <img src="../assets/logo-mini.svg" alt="logo-mini" class="logo-mini" />
     </div>
@@ -27,8 +28,16 @@
 import CommonInput from "@/components/CommonInput.vue";
 export default {
   name: "LoginTab",
+  props: {
+    isLoginActive: String,
+  },
   components: {
     CommonInput,
+  },
+  methods: {
+    goBack() {
+      this.$emit("loginClosed", false);
+    },
   },
 };
 </script>
