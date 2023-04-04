@@ -1,15 +1,17 @@
 <template>
-  <InitialPage />
+  <router-view></router-view>
+  <!--<InitialPage />-->
 </template>
 
 <script>
-import InitialPage from "./page/InitialPage.vue";
-
+// import InitialPage from "./page/InitialPage.vue";
+// import HomePage from "./page/HomePage.vue";
 export default {
   name: "App",
-  components: {
-    InitialPage,
-  },
+  // components: {
+  //   InitialPage,
+  //   HomePage,
+  // },
 };
 </script>
 
