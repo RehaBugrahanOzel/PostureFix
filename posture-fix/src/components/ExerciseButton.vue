@@ -21,7 +21,7 @@ export default {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   border-radius: 8px;
   font-family: "Arial";
   font-style: normal;

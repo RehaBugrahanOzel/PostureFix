@@ -1,10 +1,9 @@
 <template>
   <div class="initial">
-    <div class="page">
-      <div class="burger-button">
-        <img src="../assets/img/hamburger-icon.svg" class="element" />
-      </div>
-
+    <div class="burger-button">
+      <img src="../assets/img/hamburger-icon.svg" class="element" />
+    </div>
+    <div class="page" v-if="!isExerciseActive">
       <div class="page-image">
         <ExerciseButton
           class="exercise-button"
@@ -18,15 +17,25 @@
             class="category-button"
             :text="item.txt"
             :src="item.img"
+            @click="exerciseSelected(item.txt)"
           ></CategoryButton>
         </div>
       </div>
     </div>
+    <ExerciseTab
+      class="exercise-tab"
+      v-if="isExerciseActive"
+      :categoryName="selectedExercise"
+      :isExerciseActive="isExerciseActive"
+      @exerciseClosed="exerciseClosed"
+    >
+    </ExerciseTab>
   </div>
 </template>
-
+1
 <script>
 import CategoryButton from "../components/CategoryButton.vue";
+import ExerciseTab from "@/tabs/ExerciseTab.vue";
 import ExerciseButton from "@/components/ExerciseButton.vue";
 import ExerciseOfTheDay from "../assets/img/exercise-of-the-day.svg";
 import Core from "../assets/img/body-parts/core.svg";
@@ -42,6 +51,7 @@ export default {
   components: {
     CategoryButton,
     ExerciseButton,
+    ExerciseTab,
   },
   data() {
     return {
@@ -55,7 +65,21 @@ export default {
         { txt: "Full Body", img: FullBody },
         { txt: "Leg", img: Leg },
       ],
+
+      isExerciseActive: false,
+      selectedExercise: "",
     };
+  },
+
+  methods: {
+    exerciseSelected(item) {
+      this.isExerciseActive = true;
+      this.selectedExercise = item;
+    },
+
+    exerciseClosed(state) {
+      this.isExerciseActive = state;
+    },
   },
 };
 </script>
@@ -88,7 +112,7 @@ export default {
 
 .burger-button {
   margin-top: 37px;
-  margin-left: 0px;
+  margin-left: 8px;
   margin-bottom: 10px;
   width: 90%;
   display: flex;
@@ -121,7 +145,7 @@ export default {
 }
 
 .category-button {
-  width: 169px;
+  width: 158px;
   height: 150px;
   margin: 5px;
 }
@@ -135,5 +159,17 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.exercise-tab {
+  background-color: #000000;
+  position: fixed;
+  overflow: scroll;
+  top: 92px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  border-radius: 32px 32px 0 0;
+  height: -webkit-fill-available;
 }
 </style>

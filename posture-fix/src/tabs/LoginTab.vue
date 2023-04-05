@@ -33,7 +33,7 @@
       <CommonIconButton :src="appleIconSrc" class="element" />
     </div>
     <div class="register-now">
-      Don’t have an account?
+      Don't have an account?
       <a @click="goToRegister" style="color: #35c2c1">Register Now</a>
     </div>
   </div>
