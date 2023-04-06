@@ -1,5 +1,8 @@
 import HomePage from "../page/HomePage.vue";
 import InitialPage from "../page/InitialPage.vue";
+
+import ForgotPassword from "@/page/ForgotPassword.vue";
+
 import { createRouter, createWebHistory } from "vue-router";
 
 const routers = [
@@ -12,6 +15,11 @@ const routers = [
     path: "/home",
     component: HomePage,
     name: "home-page",
+  },
+  {
+    path: "/forgotPassword",
+    component: ForgotPassword,
+    name: "forgot-password-page",
   },
 ];
 

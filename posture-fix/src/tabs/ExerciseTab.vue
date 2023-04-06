@@ -123,11 +123,5 @@ export default {
 
 .container-wrapper {
   display: flex;
-  /*background: rgb(0, 0, 0);
-  background: linear-gradient(
-    0deg,
-    rgba(0, 0, 0, 1) 31%,
-    rgba(207, 226, 243, 1) 100%
-  );*/
 }
 </style>
