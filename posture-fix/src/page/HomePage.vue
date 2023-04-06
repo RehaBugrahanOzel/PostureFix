@@ -1,25 +1,27 @@
 <template>
   <div class="initial">
-    <div class="burger-button">
-      <!--<img src="../assets/img/hamburger-icon.svg" class="element" />-->
-      <BurgerMenu></BurgerMenu>
-    </div>
-    <div class="page" v-if="!isExerciseActive">
-      <div class="page-image">
-        <ExerciseButton
-          class="exercise-button"
-          :src="exerciseOfTheDayImg"
-          :text="exerciseOfTheDayTxt"
-        ></ExerciseButton>
+    <div v-if="!videoExerciseActive">
+      <div class="burger-button">
+        <!--<img src="../assets/img/hamburger-icon.svg" class="element" />-->
+        <BurgerMenu></BurgerMenu>
       </div>
-      <div class="container-wrapper">
-        <div class="flex-container" v-for="item in exercisesList" :key="item">
-          <CategoryButton
-            class="category-button"
-            :text="item.txt"
-            :src="item.img"
-            @click="exerciseSelected(item.txt)"
-          ></CategoryButton>
+      <div class="page" v-if="!isExerciseActive">
+        <div class="page-image">
+          <ExerciseButton
+            class="exercise-button"
+            :src="exerciseOfTheDayImg"
+            :text="exerciseOfTheDayTxt"
+          ></ExerciseButton>
+        </div>
+        <div class="container-wrapper">
+          <div class="flex-container" v-for="item in exercisesList" :key="item">
+            <CategoryButton
+              class="category-button"
+              :text="item.txt"
+              :src="item.img"
+              @click="exerciseSelected(item.txt)"
+            ></CategoryButton>
+          </div>
         </div>
       </div>
     </div>
@@ -29,8 +31,16 @@
       :categoryName="selectedExercise"
       :isExerciseActive="isExerciseActive"
       @exerciseClosed="exerciseClosed"
+      @exerciseChoosed="exerciseChoosed"
     >
     </ExerciseTab>
+    <VideoExerciseTab
+      class="video-exercise-tab"
+      v-if="videoExerciseActive"
+      :videoExerciseInfo="videoExerciseInfo"
+      :videoExerciseActive="videoExerciseActive"
+      @videoExerciseClosed="videoExerciseClosed"
+    ></VideoExerciseTab>
   </div>
 </template>
 1
@@ -38,6 +48,7 @@
 import BurgerMenu from "@/components/BurgerMenu.vue";
 import CategoryButton from "../components/CategoryButton.vue";
 import ExerciseTab from "@/tabs/ExerciseTab.vue";
+import VideoExerciseTab from "@/tabs/VideoExerciseTab.vue";
 import ExerciseButton from "@/components/ExerciseButton.vue";
 import ExerciseOfTheDay from "../assets/img/exercise-of-the-day.svg";
 import Core from "../assets/img/body-parts/core.svg";
@@ -55,6 +66,7 @@ export default {
     ExerciseButton,
     ExerciseTab,
     BurgerMenu,
+    VideoExerciseTab,
   },
   data() {
     return {
@@ -71,6 +83,8 @@ export default {
 
       isExerciseActive: false,
       selectedExercise: "",
+      videoExerciseActive: false,
+      videoExerciseInfo: {},
     };
   },
 
@@ -82,6 +96,15 @@ export default {
 
     exerciseClosed(state) {
       this.isExerciseActive = state;
+    },
+    exerciseChoosed(state, item) {
+      this.videoExerciseActive = state;
+      this.videoExerciseInfo = item;
+      this.isExerciseActive = false;
+    },
+    videoExerciseClosed(state) {
+      this.videoExerciseActive = state;
+      this.isExerciseActive = true;
     },
   },
 };
@@ -168,14 +191,22 @@ export default {
   background-color: #000000;
   position: fixed;
   overflow: scroll;
-  top: 92px;
+  top: 60px;
   right: 0px;
   bottom: 0px;
   left: 0px;
   border-radius: 32px 32px 0 0;
   height: -webkit-fill-available;
 }
-
+.video-exercise-tab {
+  background-color: #ffffff;
+  position: absolute;
+  top: 44px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  border-radius: 32px 32px 0 0;
+}
 /* .burger-button.toggle > input {
   display: none;
 }

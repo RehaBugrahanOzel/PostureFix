@@ -17,7 +17,7 @@
           class="button"
           :text="item.txt"
           :src="item.img"
-          @click="enterExercise"
+          @click="enterExercise(item)"
         ></ExerciseButton>
       </div>
     </div>
@@ -49,7 +49,8 @@ export default {
     goBack() {
       this.$emit("exerciseClosed", false);
     },
-    enterExercise() {
+    enterExercise(state, item) {
+      this.$emit("exerciseChoosed", state, item);
       //router.push("/exercise");
     },
   },
@@ -88,7 +89,7 @@ export default {
   height: 41px;
   position: absolute;
   left: 0;
-  margin: 54px 0 0 8px;
+  margin: 54px 0 0 12px;
 }
 
 .text {
