@@ -117,8 +117,8 @@ export default {
   align-content: flex-start;
   /* width: 90%;
   height: 80vh; */
-  overflow: auto;
-  flex-direction: row;
+  /* overflow: auto;
+  flex-direction: row; */
 }
 
 .container-wrapper {

@@ -31,7 +31,7 @@ export default {
   font-style: normal;
   font-weight: 600;
   font-size: 15px;
-  line-height: 18px;
+  line-height: 56px;
 }
 .light {
   background-color: #ffffff;

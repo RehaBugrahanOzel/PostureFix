@@ -7,17 +7,28 @@
         inputType === 'password' ? 'input-text-password' : 'input-text-txt'
       "
     />
-    <img
-      src="../assets/img/show-password.svg"
-      alt="show-password"
-      class="show-password"
-      v-if="inputType === 'password'"
-      @click="showPassword"
-    />
+    <div v-if="inputType === 'password'">
+      <img
+        src="../assets/img/password_hide.png"
+        alt="show-password"
+        class="show-password"
+        @click="showPassword"
+        v-if="!src"
+      />
+      <img
+        :src="src"
+        alt="show-password"
+        class="show-password"
+        @click="showPassword"
+        v-else
+      />
+    </div>
   </div>
 </template>
 
 <script>
+import PasswordHide from "../assets/img/password_hide.png";
+import PasswordShow from "../assets/img/password_view.png";
 export default {
   props: {
     inputType: String,
@@ -26,15 +37,19 @@ export default {
   data() {
     return {
       inputTypeData: this.inputType,
+      passwordShow: PasswordShow,
+      passwordHide: PasswordHide,
+      src: this.passwordHide,
     };
   },
   methods: {
     showPassword() {
       if (this.inputTypeData === "password") {
         this.inputTypeData = "text";
+        this.src = this.passwordShow;
       } else {
         this.inputTypeData = "password";
-
+        this.src = this.passwordHide;
         console.log("tiklandi", this.inputTypeData);
       }
     },
@@ -81,6 +96,8 @@ export default {
   border-radius: 0 8px 8px 0;
   border-color: #cccccc;
   border-style: solid;
-  padding: 18px;
+  padding: 16px;
+  width: 22px;
+  height: 22px;
 }
 </style>

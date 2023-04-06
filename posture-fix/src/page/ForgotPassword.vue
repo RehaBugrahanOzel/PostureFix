@@ -35,7 +35,7 @@
 
         <div class="register-now">
           Remember Password?
-          <a @click="goBack" style="color: #35c2c1">Login</a>
+          <a @click="goBack" style="color: #35c2c1">Home</a>
         </div>
       </div>
     </div>
@@ -147,6 +147,8 @@ export default {
   font-size: 14px;
   margin-top: 26px;
   bottom: 30px;
+  display: flex;
+  justify-content: center;
 }
 
 .logo-mini {
@@ -158,7 +160,10 @@ export default {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  justify-content: flex-end;
   align-items: center;
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translate(-50%, 0);
 }
 </style>

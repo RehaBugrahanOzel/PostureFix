@@ -82,6 +82,8 @@ export default {
   align-items: center;
   padding-top: 7px;
   font-family: "Arial";
+  overflow: auto;
+  flex-direction: column;
 }
 
 .input-section {
@@ -158,7 +160,7 @@ export default {
   left: 110px;
 }
 .login-options {
-  margin-top: 22px;
+  margin: 22px 0;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;

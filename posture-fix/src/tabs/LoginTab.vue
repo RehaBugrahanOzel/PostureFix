@@ -34,7 +34,7 @@
     </div>
     <div class="register-now">
       Don't have an account?
-      <a @click="goToRegister" style="color: #35c2c1">Register Now</a>
+      <a @click="goToRegister" style="color: #35c2c1">Home</a>
     </div>
   </div>
 </template>
@@ -67,6 +67,9 @@ export default {
 
     forgotPassword() {
       router.push("/forgotPassword");
+    },
+    goToRegister() {
+      router.push("/");
     },
   },
   data() {
@@ -184,6 +187,6 @@ export default {
 .register-now {
   font-size: 14px;
   margin-top: 83px;
-  bottom: 30px;
+  line-height: 40px;
 }
 </style>

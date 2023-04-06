@@ -10,11 +10,9 @@
         </label>
 
         <nav class="menu1">
-          <a class="link1" href="">Our Models asdaskljdfhalk;dhjfglaks </a>
-          <a class="link1" href="">Specialties</a>
-          <a class="link1" href="">About</a>
-          <a class="link1" href="">Blog</a>
-          <a class="link1 kbutton-nav" href="">Contact</a>
+          <a class="link1" href="">Profile</a>
+          <a class="link1" href="">Settings</a>
+          <a class="link1" href="" style="color: #f15b40">Logout</a>
         </nav>
       </nav>
     </section>
@@ -107,7 +105,7 @@ a {
 }
 
 #toggle1:checked ~ .menu1 {
-  height: 340px;
+  height: 130px;
 }
 
 /* Menu */
@@ -117,8 +115,8 @@ a {
   display: -ms-grid;
   display: grid;
   grid-template-rows: 1fr repeat(4, 0.5fr);
-  grid-row-gap: 25px;
-  padding: 0;
+  grid-row-gap: 0;
+  padding: 0 20px;
   list-style: none;
   clear: both;
   width: auto;
@@ -131,11 +129,15 @@ a {
   transition: all 0.3s ease;
   border: hidden;
   border-radius: 8px;
-  background-color: #ffffff;
+  background: rgb(255, 255, 255);
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(223, 236, 252, 0.9) 0%
+  );
 }
 
 .menu1 a:first-child {
-  margin-top: 20px;
 }
 
 .menu1 a:last-child {
