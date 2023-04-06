@@ -114,7 +114,7 @@ export default {
 }
 
 .burger-button {
-  margin-top: 37px;
+  margin-top: 50px;
   margin-left: 2px;
   margin-bottom: 10px;
   width: 40%;

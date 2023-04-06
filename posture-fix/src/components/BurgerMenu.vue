@@ -10,7 +10,7 @@
         </label>
 
         <nav class="menu1">
-          <a class="link1" href="">Our Models</a>
+          <a class="link1" href="">Our Models asdaskljdfhalk;dhjfglaks </a>
           <a class="link1" href="">Specialties</a>
           <a class="link1" href="">About</a>
           <a class="link1" href="">Blog</a>
@@ -44,6 +44,9 @@ export default {};
   position: fixed;
   z-index: 1;
   top: 5px;
+  border: hidden;
+  border-radius: 8px;
+  margin-left: 8px;
 }
 
 a {
@@ -57,12 +60,15 @@ a {
 
 /* Hamburger */
 .hamburger1 {
-  margin: 10px;
+  padding: 13px 0px;
   display: -ms-grid;
   display: grid;
-  grid-template-rows: repeat(3, 1fr);
+  /* grid-template-rows: repeat(3, 1fr); */
   justify-items: center;
   z-index: 120;
+  width: 47px;
+  background-color: #ffffff;
+  border-radius: 8px;
 }
 
 .hamburger1 div {
@@ -83,7 +89,7 @@ a {
 #toggle1:checked + .hamburger1 .top {
   -webkit-transform: rotate(-45deg);
   transform: rotate(-45deg);
-  margin-top: 22.5px;
+  margin-top: 10px;
   border-radius: 2px;
 }
 
@@ -107,7 +113,6 @@ a {
 /* Menu */
 .menu1 {
   width: 100%;
-  background-color: #cdcdcd;
   margin: 0;
   display: -ms-grid;
   display: grid;
@@ -124,6 +129,9 @@ a {
   z-index: 120;
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
+  border: hidden;
+  border-radius: 8px;
+  background-color: #ffffff;
 }
 
 .menu1 a:first-child {
