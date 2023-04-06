@@ -1,7 +1,8 @@
 <template>
   <div class="initial">
     <div class="burger-button">
-      <img src="../assets/img/hamburger-icon.svg" class="element" />
+      <!--<img src="../assets/img/hamburger-icon.svg" class="element" />-->
+      <BurgerMenu></BurgerMenu>
     </div>
     <div class="page" v-if="!isExerciseActive">
       <div class="page-image">
@@ -34,6 +35,7 @@
 </template>
 1
 <script>
+import BurgerMenu from "@/components/BurgerMenu.vue";
 import CategoryButton from "../components/CategoryButton.vue";
 import ExerciseTab from "@/tabs/ExerciseTab.vue";
 import ExerciseButton from "@/components/ExerciseButton.vue";
@@ -52,6 +54,7 @@ export default {
     CategoryButton,
     ExerciseButton,
     ExerciseTab,
+    BurgerMenu,
   },
   data() {
     return {
@@ -112,9 +115,9 @@ export default {
 
 .burger-button {
   margin-top: 37px;
-  margin-left: 8px;
+  margin-left: 2px;
   margin-bottom: 10px;
-  width: 90%;
+  width: 40%;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -172,4 +175,54 @@ export default {
   border-radius: 32px 32px 0 0;
   height: -webkit-fill-available;
 }
+
+/* .burger-button.toggle > input {
+  display: none;
+}
+
+.burger-button > a,
+.burger-button.toggle > label {
+  border-radius: 2px;
+  box-shadow: 0 6px 5px -5px rgba(0, 0, 0, 0.3);
+}
+
+.burger-button > a::after,
+.burger-button.toggle > label::after {
+  content: "";
+  float: right;
+  margin: 15px 15px 0 0;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 10px solid #ccc;
+}
+
+.burger-button ul {
+  list-style-type: none;
+  display: block;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  width: 100%;
+  box-shadow: 0 6px 5px -5px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+.burger-button a,
+.burger-button.toggle > label {
+  display: block;
+  padding: 0 0 0 10px;
+  text-decoration: none;
+  line-height: 40px;
+  font-size: 13px;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #999;
+  background-color: #fff;
+}
+.burger-button li {
+  height: 0;
+  overflow: hidden;
+  transition: all 500ms;
+} */
 </style>
