@@ -22,7 +22,7 @@
         inputType="password"
       />
       <div class="forgot-password">
-        <div>Forgot Password?</div>
+        <div @click="forgotPassword">Forgot Password?</div>
       </div>
     </div>
     <CommonButton text="Login" class="button" wrapper="dark" @click="login" />
@@ -63,6 +63,10 @@ export default {
     },
     login() {
       router.push("/home");
+    },
+
+    forgotPassword() {
+      router.push("/forgotPassword");
     },
   },
   data() {
