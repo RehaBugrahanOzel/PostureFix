@@ -43,7 +43,7 @@
     ></VideoExerciseTab>
   </div>
 </template>
-1
+
 <script>
 import BurgerMenu from "@/components/BurgerMenu.vue";
 import CategoryButton from "../components/CategoryButton.vue";
