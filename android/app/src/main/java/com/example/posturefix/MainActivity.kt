@@ -15,14 +15,26 @@ import androidx.core.content.ContextCompat.startActivity
 class MainActivity : AppCompatActivity() {
     private val instance = this
     private lateinit var vueApp : WebView
+    //private var isCameraOpened : Boolean = false
+
+
+    /*fun setIsCameraOpened(flag : Boolean) {
+        isCameraOpened = flag
+    }*/
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         getPermission()
         vueApp = findViewById<WebView>(R.id.myVueApp)
             vueApp.settings.javaScriptEnabled = true
-            vueApp.loadUrl("http://172.20.10.3:8080/")
-            vueApp.addJavascriptInterface(myVueAppInterface(this),"androidApp")
+            vueApp.loadUrl("https://rehabugrahanozel.github.io/")
+            vueApp.addJavascriptInterface(MyVueAppInterface(this),"androidApp")
+
+        /*if (isCameraOpened) {
+            val intent = Intent(this, CameraActivity::class.java)
+            startActivity(intent)
+        }*/
     }
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
         if (event.getAction() === KeyEvent.ACTION_DOWN) {
@@ -67,11 +79,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    class myVueAppInterface(private val ctx: Context) {
+    class MyVueAppInterface(private val ctx: Context) {
         @JavascriptInterface
-        fun toastText(txt: String) {
+        fun startCamera(txt: String) {
             Toast.makeText(ctx,txt,Toast.LENGTH_SHORT).show()
-            // startActivity(Intent(ctx, CameraActivity::class.java))
+            ctx.startActivity(Intent(ctx, CameraActivity::class.java))
         }
     }
 

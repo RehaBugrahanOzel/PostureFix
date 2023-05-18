@@ -51,7 +51,7 @@ export default {
       this.$emit("videoExerciseClosed", false);
     },
     start() {
-      androidApp.toastText("Camera will be opened here!");
+      androidApp.startCamera("Openning...");
     },
   },
   data() {
