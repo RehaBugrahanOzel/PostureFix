@@ -14,6 +14,7 @@ import android.os.Handler
 import android.os.HandlerThread
 import android.view.Surface
 import android.view.TextureView
+import android.widget.Toast
 
 class CameraActivity : AppCompatActivity() {
     lateinit var capReq: CaptureRequest.Builder
@@ -24,10 +25,14 @@ class CameraActivity : AppCompatActivity() {
     lateinit var cameraCaptureSession: CameraCaptureSession
     lateinit var cameraDevice: CameraDevice
     lateinit var captureRequest: CaptureRequest
+    lateinit var rtspService: RTSP_Service
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_camera)
+
+
+        rtspService = RTSP_Service(this)
 
 
         textureView = findViewById(R.id.textureView)
@@ -67,10 +72,11 @@ class CameraActivity : AppCompatActivity() {
                     override fun onConfigured(p0: CameraCaptureSession) {
                         cameraCaptureSession = p0
                         cameraCaptureSession.setRepeatingRequest(capReq.build(), null, null)
+                        rtspService.stream(textureView);
                     }
 
                     override fun onConfigureFailed(p0: CameraCaptureSession) {
-
+                        Toast.makeText(this@CameraActivity,"AMK OLMADI BU",Toast.LENGTH_LONG).show();
                     }
                 }, handler)
             }
