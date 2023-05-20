@@ -57,7 +57,7 @@ class CameraActivity : AppCompatActivity() {
     }
     @SuppressLint("MissingPermission")
     fun openCamera() {
-        cameraManager.openCamera(cameraManager.cameraIdList[0], object: CameraDevice.StateCallback(){
+        cameraManager.openCamera(cameraManager.cameraIdList[1], object: CameraDevice.StateCallback(){
             override fun onOpened(p0: CameraDevice) {
                 cameraDevice = p0
                 capReq = cameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW)
