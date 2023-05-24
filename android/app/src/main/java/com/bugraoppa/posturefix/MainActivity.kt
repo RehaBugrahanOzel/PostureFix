@@ -1,19 +1,17 @@
-package com.example.posturefix
+package com.bugraoppa.posturefix
 
 import android.content.Context
 import android.content.Intent
-import android.os.Bundle
 import android.content.pm.PackageManager
+import android.os.Bundle
 import android.view.KeyEvent
 import android.webkit.JavascriptInterface
 import android.webkit.WebView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.startActivity
+
 
 class MainActivity : AppCompatActivity() {
-    private val instance = this
     private lateinit var vueApp : WebView
     //private var isCameraOpened : Boolean = false
 
@@ -27,14 +25,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         getPermission()
         vueApp = findViewById<WebView>(R.id.myVueApp)
-            vueApp.settings.javaScriptEnabled = true
-            vueApp.loadUrl("https://rehabugrahanozel.github.io/")
-            vueApp.addJavascriptInterface(MyVueAppInterface(this),"androidApp")
-
-        /*if (isCameraOpened) {
-            val intent = Intent(this, CameraActivity::class.java)
-            startActivity(intent)
-        }*/
+        vueApp.settings.javaScriptEnabled = true
+        vueApp.loadUrl("https://rehabugrahanozel.github.io")
+        vueApp.addJavascriptInterface(MyVueAppInterface(this),"androidApp")
     }
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
         if (event.getAction() === KeyEvent.ACTION_DOWN) {
@@ -85,6 +78,7 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(ctx,txt,Toast.LENGTH_SHORT).show()
             ctx.startActivity(Intent(ctx, CameraActivity::class.java))
         }
+
     }
 
 

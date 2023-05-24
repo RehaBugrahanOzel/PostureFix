@@ -1,7 +1,6 @@
-package com.example.posturefix;
+package com.bugraoppa.posturefix;
 
 import android.app.Activity;
-import android.view.SurfaceView;
 import android.view.TextureView;
 import android.widget.Toast;
 

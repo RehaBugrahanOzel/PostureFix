@@ -1,7 +1,6 @@
-package com.example.posturefix
+package com.bugraoppa.posturefix
 
 import android.annotation.SuppressLint
-import android.content.AsyncQueryHandler
 import android.content.Context
 import android.graphics.SurfaceTexture
 import android.hardware.camera2.CameraCaptureSession

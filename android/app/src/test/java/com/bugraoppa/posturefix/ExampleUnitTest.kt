@@ -1,4 +1,4 @@
-package com.example.posturefix
+package com.bugraoppa.posturefix
 
 import org.junit.Test
 
