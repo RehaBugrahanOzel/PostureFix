@@ -10,7 +10,7 @@ import android.webkit.WebView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
-
+var RESULT_CODE = 31
 class MainActivity : AppCompatActivity() {
     private lateinit var vueApp : WebView
     //private var isCameraOpened : Boolean = false
@@ -26,8 +26,15 @@ class MainActivity : AppCompatActivity() {
         getPermission()
         vueApp = findViewById<WebView>(R.id.myVueApp)
         vueApp.settings.javaScriptEnabled = true
-        vueApp.loadUrl("https://rehabugrahanozel.github.io")
+        vueApp.loadUrl("http://192.168.1.111:8080")
         vueApp.addJavascriptInterface(MyVueAppInterface(this),"androidApp")
+    }
+
+
+    override fun onResume() {
+        super.onResume()
+        vueApp.evaluateJavascript("document.dispatchEvent(new Event(\"exerciseEnd\"))", null)
+
     }
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
         if (event.getAction() === KeyEvent.ACTION_DOWN) {

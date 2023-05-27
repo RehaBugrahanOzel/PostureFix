@@ -7,13 +7,19 @@ import android.hardware.camera2.CameraCaptureSession
 import android.hardware.camera2.CameraDevice
 import android.hardware.camera2.CameraManager
 import android.hardware.camera2.CaptureRequest
-import androidx.appcompat.app.AppCompatActivity
+import android.os.AsyncTask
 import android.os.Bundle
 import android.os.Handler
 import android.os.HandlerThread
 import android.view.Surface
 import android.view.TextureView
+import android.widget.Button
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import java.net.HttpURLConnection
+import java.net.URL
+import kotlin.concurrent.thread
+
 
 class CameraActivity : AppCompatActivity() {
     lateinit var capReq: CaptureRequest.Builder
@@ -25,6 +31,7 @@ class CameraActivity : AppCompatActivity() {
     lateinit var cameraDevice: CameraDevice
     lateinit var captureRequest: CaptureRequest
     lateinit var rtspService: RTSP_Service
+    lateinit var capture : Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,12 +42,29 @@ class CameraActivity : AppCompatActivity() {
 
 
         textureView = findViewById(R.id.textureView)
+        capture = findViewById(R.id.capture)
         cameraManager = getSystemService(Context.CAMERA_SERVICE) as CameraManager
         handlerThread = HandlerThread("videoThread")
         handlerThread.start()
 
         handler = Handler((handlerThread).looper)
-
+        thread {
+            StartExercise().execute()
+            Thread.sleep(30000)
+            println("exercise started going back")
+            thread {
+                FinishExercise().execute()
+                println("exercise finished going back")
+                finish()
+            }
+        }
+        capture.setOnClickListener {
+            thread {
+                FinishExercise().execute()
+                println("exercise finished going back")
+                finish()
+            }
+        }
         textureView.surfaceTextureListener = object: TextureView.SurfaceTextureListener{
             override fun onSurfaceTextureAvailable(p0: SurfaceTexture, p1: Int, p2: Int) {
                 openCamera()
@@ -59,6 +83,63 @@ class CameraActivity : AppCompatActivity() {
             }
         }
     }
+    class FinishExercise() : AsyncTask<Void, Void, String>() {
+        override fun doInBackground(vararg params: Void?): String? {
+            val url = URL("http://www.google.com/")
+            var response_code: String = ""
+            with(url.openConnection() as HttpURLConnection) {
+                requestMethod = "GET"  // optional default is GET
+
+                println("\nSent 'GET' request to URL : $url; Response Code : $responseCode")
+                response_code = "$responseCode"
+                inputStream.bufferedReader().use {
+                    it.lines().forEach { line ->
+                        println(line)
+                    }
+                }
+            }
+            return "basarili"
+        }
+
+        override fun onPreExecute() {
+            super.onPreExecute()
+            // ...
+        }
+
+        override fun onPostExecute(result: String?) {
+            super.onPostExecute(result)
+            println("result is: $result")
+        }
+    }
+
+    class StartExercise() : AsyncTask<Void, Void, String>() {
+        override fun doInBackground(vararg params: Void?): String? {
+            val url = URL("http://www.google.com/")
+            var response_code: String = ""
+            with(url.openConnection() as HttpURLConnection) {
+                requestMethod = "GET"  // optional default is GET
+
+                println("\nSent 'GET' request to URL : $url; Response Code : $responseCode")
+                response_code = "$responseCode"
+                inputStream.bufferedReader().use {
+                    it.lines().forEach { line ->
+                        println(line)
+                    }
+                }
+            }
+            return "basarili"
+        }
+
+        override fun onPreExecute() {
+            super.onPreExecute()
+            // ...
+        }
+
+        override fun onPostExecute(result: String?) {
+            super.onPostExecute(result)
+            println("result is: $result")
+        }
+    }
     @SuppressLint("MissingPermission")
     fun openCamera() {
         cameraManager.openCamera(cameraManager.cameraIdList[1], object: CameraDevice.StateCallback(){
@@ -71,7 +152,7 @@ class CameraActivity : AppCompatActivity() {
                     override fun onConfigured(p0: CameraCaptureSession) {
                         cameraCaptureSession = p0
                         cameraCaptureSession.setRepeatingRequest(capReq.build(), null, null)
-                        rtspService.stream(textureView);
+                        // rtspService.stream(textureView);
                     }
 
                     override fun onConfigureFailed(p0: CameraCaptureSession) {
