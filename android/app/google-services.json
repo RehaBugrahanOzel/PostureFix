@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "172248556699",
+    "firebase_url": "https://posturefix-1f17b-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "posturefix-1f17b",
+    "storage_bucket": "posturefix-1f17b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:172248556699:android:a2254b0fb912b8d273123e",
+        "android_client_info": {
+          "package_name": "com.bugraoppa.posturefix"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "172248556699-0ipnjbbf7s26c40l1siac3hpnd0ffl4o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNApcbsoSKzL5EGqRfJr2Q30FnT2XSpdo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "172248556699-0ipnjbbf7s26c40l1siac3hpnd0ffl4o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
