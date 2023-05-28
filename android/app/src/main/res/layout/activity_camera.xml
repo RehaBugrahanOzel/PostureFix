@@ -25,6 +25,9 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="32dp"
         android:text="finish"
+        android:textAllCaps="true"
+        android:textSize="15sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/textureView"></Button>

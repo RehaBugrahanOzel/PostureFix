@@ -21,6 +21,7 @@ import java.net.URL
 import kotlin.concurrent.thread
 
 
+lateinit var exerciseName: String
 class CameraActivity : AppCompatActivity() {
     lateinit var capReq: CaptureRequest.Builder
     lateinit var handler: Handler
@@ -46,12 +47,12 @@ class CameraActivity : AppCompatActivity() {
         cameraManager = getSystemService(Context.CAMERA_SERVICE) as CameraManager
         handlerThread = HandlerThread("videoThread")
         handlerThread.start()
-
+        exerciseName = intent.getStringExtra("exercise").toString()
         handler = Handler((handlerThread).looper)
         thread {
             StartExercise().execute()
-            Thread.sleep(30000)
             println("exercise started going back")
+            Thread.sleep(3000)
             thread {
                 FinishExercise().execute()
                 println("exercise finished going back")
@@ -85,7 +86,7 @@ class CameraActivity : AppCompatActivity() {
     }
     class FinishExercise() : AsyncTask<Void, Void, String>() {
         override fun doInBackground(vararg params: Void?): String? {
-            val url = URL("http://www.google.com/")
+            val url = URL("http://127.0.0.1:5000/stop")
             var response_code: String = ""
             with(url.openConnection() as HttpURLConnection) {
                 requestMethod = "GET"  // optional default is GET
@@ -114,7 +115,8 @@ class CameraActivity : AppCompatActivity() {
 
     class StartExercise() : AsyncTask<Void, Void, String>() {
         override fun doInBackground(vararg params: Void?): String? {
-            val url = URL("http://www.google.com/")
+            val url = URL("http://127.0.0.1:5000/analyze/$exerciseName")
+            //val url = URL("http://www.google.com/")
             var response_code: String = ""
             with(url.openConnection() as HttpURLConnection) {
                 requestMethod = "GET"  // optional default is GET

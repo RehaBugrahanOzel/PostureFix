@@ -81,9 +81,10 @@ class MainActivity : AppCompatActivity() {
 
     class MyVueAppInterface(private val ctx: Context) {
         @JavascriptInterface
-        fun startCamera(txt: String) {
-            Toast.makeText(ctx,txt,Toast.LENGTH_SHORT).show()
-            ctx.startActivity(Intent(ctx, CameraActivity::class.java))
+        fun startCamera(exercise: String) {
+            var intent = Intent(ctx, CameraActivity::class.java)
+            intent.putExtra("exercise", exercise)
+            ctx.startActivity(intent)
         }
 
     }
