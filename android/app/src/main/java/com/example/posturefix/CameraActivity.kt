@@ -76,7 +76,7 @@ class CameraActivity : AppCompatActivity() {
                     }
 
                     override fun onConfigureFailed(p0: CameraCaptureSession) {
-                        Toast.makeText(this@CameraActivity,"AMK OLMADI BU",Toast.LENGTH_LONG).show();
+
                     }
                 }, handler)
             }
