@@ -7,13 +7,12 @@ import android.hardware.camera2.CameraCaptureSession
 import android.hardware.camera2.CameraDevice
 import android.hardware.camera2.CameraManager
 import android.hardware.camera2.CaptureRequest
-import android.os.AsyncTask
-import android.os.Bundle
-import android.os.Handler
-import android.os.HandlerThread
+import android.os.*
 import android.view.Surface
 import android.view.TextureView
+import android.view.View
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import java.net.HttpURLConnection
@@ -31,15 +30,18 @@ class CameraActivity : AppCompatActivity() {
     lateinit var cameraCaptureSession: CameraCaptureSession
     lateinit var cameraDevice: CameraDevice
     lateinit var captureRequest: CaptureRequest
-    lateinit var rtspService: RTSP_Service
+    //lateinit var rtspService: RTSP_Service
     lateinit var capture : Button
+    lateinit var timerText : TextView
+    lateinit var timerText2 : TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_camera)
+        timerText = findViewById(R.id.timerText)
+        timerText2 = findViewById(R.id.timerText2)
+        //rtspService = RTSP_Service(this)
 
-
-        rtspService = RTSP_Service(this)
 
 
         textureView = findViewById(R.id.textureView)
@@ -52,12 +54,6 @@ class CameraActivity : AppCompatActivity() {
         thread {
             StartExercise().execute()
             println("exercise started going back")
-            Thread.sleep(3000)
-            thread {
-                FinishExercise().execute()
-                println("exercise finished going back")
-                finish()
-            }
         }
         capture.setOnClickListener {
             thread {
@@ -84,9 +80,38 @@ class CameraActivity : AppCompatActivity() {
             }
         }
     }
+
+    override fun onStart() {
+        super.onStart()
+        val timer1 = object: CountDownTimer(6000, 1000) {
+            override fun onTick(millisUntilFinished1: Long) {
+                timerText2.text = (millisUntilFinished1 / 1000).toString()
+            }
+
+            override fun onFinish() {
+                timerText2.visibility = View.GONE
+                val timer2 = object: CountDownTimer(30000, 1000) {
+                    override fun onTick(millisUntilFinished2: Long) {
+                        timerText.text = (millisUntilFinished2 / 1000).toString()
+                    }
+
+                    override fun onFinish() {
+                        thread {
+                            FinishExercise().execute()
+                            println("exercise finished going back")
+                            finish()
+                        }
+                    }
+                }
+                timer2.start()
+            }
+        }
+        timer1.start()
+
+    }
     class FinishExercise() : AsyncTask<Void, Void, String>() {
         override fun doInBackground(vararg params: Void?): String? {
-            val url = URL("http://127.0.0.1:5000/stop")
+            val url = URL("http://192.168.1.111:5000/stop")
             var response_code: String = ""
             with(url.openConnection() as HttpURLConnection) {
                 requestMethod = "GET"  // optional default is GET
@@ -109,13 +134,12 @@ class CameraActivity : AppCompatActivity() {
 
         override fun onPostExecute(result: String?) {
             super.onPostExecute(result)
-            println("result is: $result")
         }
     }
 
     class StartExercise() : AsyncTask<Void, Void, String>() {
         override fun doInBackground(vararg params: Void?): String? {
-            val url = URL("http://127.0.0.1:5000/analyze/$exerciseName")
+            val url = URL("http://192.168.1.111:5000/analyze/$exerciseName")
             //val url = URL("http://www.google.com/")
             var response_code: String = ""
             with(url.openConnection() as HttpURLConnection) {
@@ -139,7 +163,6 @@ class CameraActivity : AppCompatActivity() {
 
         override fun onPostExecute(result: String?) {
             super.onPostExecute(result)
-            println("result is: $result")
         }
     }
     @SuppressLint("MissingPermission")
@@ -154,7 +177,7 @@ class CameraActivity : AppCompatActivity() {
                     override fun onConfigured(p0: CameraCaptureSession) {
                         cameraCaptureSession = p0
                         cameraCaptureSession.setRepeatingRequest(capReq.build(), null, null)
-                        // rtspService.stream(textureView);
+                        //rtspService.stream(textureView);
                     }
 
                     override fun onConfigureFailed(p0: CameraCaptureSession) {

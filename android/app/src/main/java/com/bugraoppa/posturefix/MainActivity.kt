@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         getPermission()
         vueApp = findViewById<WebView>(R.id.myVueApp)
         vueApp.settings.javaScriptEnabled = true
-        vueApp.loadUrl("http://192.168.1.111:8080")
+        vueApp.loadUrl("https://rehabugrahanozel.github.io/")
         vueApp.addJavascriptInterface(MyVueAppInterface(this),"androidApp")
     }
 
