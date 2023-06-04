@@ -19,6 +19,10 @@ public class RTSP_Service implements ConnectCheckerRtsp {
         this.activity = activity;
     }
 
+
+
+
+
     public void stream(TextureView openGlView) {
         //default
 
@@ -27,7 +31,7 @@ public class RTSP_Service implements ConnectCheckerRtsp {
          rtspCamera1 = new RtspCamera1(openGlView, this);
         //start stream
         if (rtspCamera1.prepareVideo()) {
-            rtspCamera1.startStream("rtsp://192.168.1.8:8554/mystream");
+            rtspCamera1.startStream("rtsp://192.168.1.12:8554/mystream");
         } else {
             /**This device cant init encoders, this could be for 2 reasons: The encoder selected doesnt support any configuration setted or
              * your device hasnt a H264 or AAC encoder (in this case you can see log error valid encoder not found)*/

@@ -21,16 +21,16 @@ import kotlin.concurrent.thread
 
 
 lateinit var exerciseName: String
+lateinit var rtspService: RTSP_Service
+lateinit var textureView: TextureView
 class CameraActivity : AppCompatActivity() {
     lateinit var capReq: CaptureRequest.Builder
     lateinit var handler: Handler
     lateinit var handlerThread: HandlerThread
     lateinit var cameraManager: CameraManager
-    lateinit var textureView: TextureView
     lateinit var cameraCaptureSession: CameraCaptureSession
     lateinit var cameraDevice: CameraDevice
     lateinit var captureRequest: CaptureRequest
-    //lateinit var rtspService: RTSP_Service
     lateinit var capture : Button
     lateinit var timerText : TextView
     lateinit var timerText2 : TextView
@@ -40,7 +40,7 @@ class CameraActivity : AppCompatActivity() {
         setContentView(R.layout.activity_camera)
         timerText = findViewById(R.id.timerText)
         timerText2 = findViewById(R.id.timerText2)
-        //rtspService = RTSP_Service(this)
+        rtspService = RTSP_Service(this)
 
 
 
@@ -52,8 +52,10 @@ class CameraActivity : AppCompatActivity() {
         exerciseName = intent.getStringExtra("exercise").toString()
         handler = Handler((handlerThread).looper)
         thread {
+            Thread.sleep(5000)
             StartExercise().execute()
             println("exercise started going back")
+
         }
         capture.setOnClickListener {
             thread {
@@ -62,9 +64,14 @@ class CameraActivity : AppCompatActivity() {
                 finish()
             }
         }
+
+
+
+
         textureView.surfaceTextureListener = object: TextureView.SurfaceTextureListener{
             override fun onSurfaceTextureAvailable(p0: SurfaceTexture, p1: Int, p2: Int) {
-                openCamera()
+                //openCamera()
+                rtspService.stream(textureView);
             }
 
             override fun onSurfaceTextureSizeChanged(p0: SurfaceTexture, p1: Int, p2: Int) {
@@ -111,7 +118,7 @@ class CameraActivity : AppCompatActivity() {
     }
     class FinishExercise() : AsyncTask<Void, Void, String>() {
         override fun doInBackground(vararg params: Void?): String? {
-            val url = URL("http://192.168.1.111:5000/stop")
+            val url = URL("http://192.168.1.12:5000/stop")
             var response_code: String = ""
             with(url.openConnection() as HttpURLConnection) {
                 requestMethod = "GET"  // optional default is GET
@@ -139,7 +146,7 @@ class CameraActivity : AppCompatActivity() {
 
     class StartExercise() : AsyncTask<Void, Void, String>() {
         override fun doInBackground(vararg params: Void?): String? {
-            val url = URL("http://192.168.1.111:5000/analyze/$exerciseName")
+            val url = URL("http://192.168.1.12:5000/analyze/$exerciseName")
             //val url = URL("http://www.google.com/")
             var response_code: String = ""
             with(url.openConnection() as HttpURLConnection) {
@@ -177,7 +184,6 @@ class CameraActivity : AppCompatActivity() {
                     override fun onConfigured(p0: CameraCaptureSession) {
                         cameraCaptureSession = p0
                         cameraCaptureSession.setRepeatingRequest(capReq.build(), null, null)
-                        //rtspService.stream(textureView);
                     }
 
                     override fun onConfigureFailed(p0: CameraCaptureSession) {
